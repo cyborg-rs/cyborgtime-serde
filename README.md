@@ -1,13 +1,13 @@
-[![](https://img.shields.io/crates/v/humantime-serde.svg)][crates-io]
-[![](https://docs.rs/humantime-serde/badge.svg)][api-docs]
+[![](https://img.shields.io/crates/v/cyborgtime-serde.svg)][crates-io]
+[![](https://docs.rs/cyborgtime-serde/badge.svg)][api-docs]
 [![Apache 2.0 licensed](https://img.shields.io/badge/license-Apache2.0-blue.svg)](./LICENSE-APACHE)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE-MIT)
 
-# humantime-serde
+# cyborgtime-serde
 
-Serde support for the `humantime` crate.
+Serde support for the `cyborgtime` crate.
 
-Heavily based on this [fork](https://github.com/tailhook/serde-humantime/tree/serde_wrapper).
+This is the cybernetic fork of [`humantime-serde`](https://github.com/jean-airoldie/humantime-serde).
 
 ## Example
 ```rust
@@ -16,10 +16,10 @@ use std::time::{Duration, SystemTime};
 
 #[derive(Serialize, Deserialize)]
 struct Foo {
-    #[serde(with = "humantime_serde")]
+    #[serde(with = "cyborgtime_serde")]
     timeout: Duration,
     #[serde(default)]
-    #[serde(with = "humantime_serde")]
+    #[serde(with = "cyborgtime_serde")]
     time: Option<SystemTime>,
 }
 ```
@@ -40,5 +40,5 @@ submitted for inclusion in the work by you, as defined in the Apache-2.0
 license, shall be dual licensed as above, without any additional terms or
 conditions.
 
-[crates-io]: https://crates.io/crates/humantime-serde
-[api-docs]: https://docs.rs/humantime-serde
+[crates-io]: https://crates.io/crates/cyborgtime-serde
+[api-docs]: https://docs.rs/cyborgtime-serde

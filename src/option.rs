@@ -1,4 +1,4 @@
-//! Convenience module to allow serialization via `humantime_serde` for `Option`
+//! Convenience module to allow serialization via `cyborgtime_serde` for `Option`
 //!
 //! # Example
 //!
@@ -9,10 +9,10 @@
 //! #[derive(Serialize, Deserialize)]
 //! struct Foo {
 //!     #[serde(default)]
-//!     #[serde(with = "humantime_serde::option")]
+//!     #[serde(with = "cyborgtime_serde::option")]
 //!     timeout: Option<Duration>,
 //!     #[serde(default)]
-//!     #[serde(with = "humantime_serde::option")]
+//!     #[serde(with = "cyborgtime_serde::option")]
 //!     time: Option<SystemTime>,
 //! }
 //! ```

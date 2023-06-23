@@ -1,16 +1,16 @@
 [package]
-name = "humantime-serde"
-version = "1.1.1"
-authors = ["jean-airoldie <maxence.caron@protonmail.com>"]
+name = "cyborgtime-serde"
+version = "1.1.2"
+authors = ["jean-airoldie <maxence.caron@protonmail.com>", "The Internet Cyborg Collective"]
 edition = "2018"
 license = "MIT OR Apache-2.0"
-description = "Serde support for the `humantime` crate"
-repository = "https://github.com/jean-airoldie/humantime-serde"
+description = "Serde support for the `cyborgtime` crate, fork from humantime-serde"
+repository = "https://github.com/cyborg-rs/cyborgtime-serde"
 readme = "README.md"
-keywords = ["serde", "humantime", "time", "duration"]
+keywords = ["serde", "cyborgtime", "time", "duration"]
 
 [dependencies]
-humantime = "2.0.0"
+cyborgtime = { version = "2.0", path = "../cyborgtime" }
 serde = { version = "1.0", features = ["derive"] }
 
 [dev-dependencies]
