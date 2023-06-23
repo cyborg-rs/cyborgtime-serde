@@ -1,9 +1,8 @@
-#![doc(html_root_url = "https://docs.rs/humantime-serde/1.0")]
 #![forbid(unsafe_code)]
 
-//! Serde support for the `humantime` crate.
+//! Serde support for the `cyborgtime` crate.
 //!
-//! Based on [this fork](https://github.com/tailhook/serde-humantime/tree/serde_wrapper).
+//! Based on [this fork](https://github.com/tailhook/serde-cyborgtime/tree/serde_wrapper).
 //!
 //! Currently `std::time::{Duration, SystemTime}` are supported.
 //!
@@ -14,10 +13,10 @@
 //!
 //! #[derive(Serialize, Deserialize)]
 //! struct Foo {
-//!     #[serde(with = "humantime_serde")]
+//!     #[serde(with = "cyborgtime_serde")]
 //!     timeout: Duration,
 //!     #[serde(default)]
-//!     #[serde(with = "humantime_serde")]
+//!     #[serde(with = "cyborgtime_serde")]
 //!     time: Option<SystemTime>,
 //! }
 //! ```
@@ -26,7 +25,7 @@
 //!
 //! ```
 //! use serde::{Serialize, Deserialize};
-//! use humantime_serde::Serde;
+//! use cyborgtime_serde::Serde;
 //! use std::time::SystemTime;
 //!
 //! #[derive(Serialize, Deserialize)]
@@ -37,7 +36,7 @@
 
 /// Reexport module.
 pub mod re {
-    pub use humantime;
+    pub use cyborgtime;
 }
 
 pub mod option;
@@ -46,10 +45,9 @@ use std::fmt;
 use std::ops::{Deref, DerefMut};
 use std::time::{Duration, SystemTime};
 
-use humantime;
 use serde::{de, ser, Deserialize, Deserializer, Serialize, Serializer};
 
-/// Deserializes a `Duration` or `SystemTime` via the humantime crate.
+/// Deserializes a `Duration` or `SystemTime` via the cyborgtime crate.
 ///
 /// This function can be used with `serde_derive`'s `with` and
 /// `deserialize_with` annotations.
@@ -61,7 +59,7 @@ where
     Serde::deserialize(d).map(Serde::into_inner)
 }
 
-/// Serializes a `Duration` or `SystemTime` via the humantime crate.
+/// Serializes a `Duration` or `SystemTime` via the cyborgtime crate.
 ///
 /// This function can be used with `serde_derive`'s `with` and
 /// `serialize_with` annotations.
@@ -132,7 +130,7 @@ impl<'de> Deserialize<'de> for Serde<Duration> {
             where
                 E: de::Error,
             {
-                humantime::parse_duration(v).map_err(|_| {
+                cyborgtime::parse_duration(v).map_err(|_| {
                     E::invalid_value(de::Unexpected::Str(v), &self)
                 })
             }
@@ -160,7 +158,7 @@ impl<'de> Deserialize<'de> for Serde<SystemTime> {
             where
                 E: de::Error,
             {
-                humantime::parse_rfc3339_weak(v).map_err(|_| {
+                cyborgtime::parse_rfc3339_weak(v).map_err(|_| {
                     E::invalid_value(de::Unexpected::Str(v), &self)
                 })
             }
@@ -199,7 +197,7 @@ impl<'a> ser::Serialize for Serde<&'a Duration> {
     where
         S: ser::Serializer,
     {
-        humantime::format_duration(*self.0)
+        cyborgtime::format_duration(*self.0)
             .to_string()
             .serialize(serializer)
     }
@@ -210,7 +208,7 @@ impl ser::Serialize for Serde<Duration> {
     where
         S: ser::Serializer,
     {
-        humantime::format_duration(self.0)
+        cyborgtime::format_duration(self.0)
             .to_string()
             .serialize(serializer)
     }
@@ -221,7 +219,7 @@ impl<'a> ser::Serialize for Serde<&'a SystemTime> {
     where
         S: ser::Serializer,
     {
-        humantime::format_rfc3339(*self.0)
+        cyborgtime::format_rfc3339(*self.0)
             .to_string()
             .serialize(serializer)
     }
@@ -232,7 +230,7 @@ impl ser::Serialize for Serde<SystemTime> {
     where
         S: ser::Serializer,
     {
-        humantime::format_rfc3339(self.0)
+        cyborgtime::format_rfc3339(self.0)
             .to_string()
             .serialize(serializer)
     }
